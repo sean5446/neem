@@ -1,5 +1,8 @@
 package com.example.demo.deductible;
 
+import org.springframework.beans.BeanUtils;
+import org.springframework.context.annotation.Bean;
+
 public class DeductibleDto {
 
     private Integer id;
@@ -62,26 +65,15 @@ public class DeductibleDto {
 
     private Double family;
 
-
     public static DeductibleDto fromDeductible(Deductible deductible) {
         DeductibleDto deductibleDto = new DeductibleDto();
-        deductibleDto.setId(deductible.getId());
-        deductibleDto.setCategory(deductible.getCategory());
-        deductibleDto.setFamily(deductible.getFamily());
-        deductibleDto.setIndividual(deductible.getIndividual());
-        deductibleDto.setStandard(deductible.isStandard());
-        deductibleDto.setInsuranceId(deductible.getInsuranceId());
+        BeanUtils.copyProperties(deductible, deductibleDto);
         return deductibleDto;
     }
 
     public static Deductible toDeductible(DeductibleDto deductibleDto) {
         Deductible deductible = new Deductible();
-        deductible.setId(deductibleDto.getId());
-        deductible.setCategory(deductibleDto.getCategory());
-        deductible.setFamily(deductibleDto.getFamily());
-        deductible.setIndividual(deductibleDto.getIndividual());
-        deductible.setStandard(deductibleDto.isStandard());
-        deductible.setInsuranceId(deductibleDto.getInsuranceId());
+        BeanUtils.copyProperties(deductibleDto, deductible);
         return deductible;
     }
 
